@@ -1,0 +1,28 @@
+{
+	"episode_meta": {
+		"video_file": "test.mp4",
+		"video_size": [1920,1080],
+		"background_image": "assets/background.png",
+		"background_audio": "assets/avia.flac",
+		"background_volume": 0.05,
+		"fps": 60
+	},
+	"scenes":
+		[
+			{
+				"scene_type": "static",
+				"image": "assets/Sicken.jpg",
+				"audio": "assets/test.wav"
+			},
+			{
+				"scene_type": "static",
+				"image": "assets/Sicken.jpg",
+				"audio": "assets/test.wav"
+			},
+			{
+				"scene_type": "static",
+				"image": "assets/Sicken.jpg",
+				"audio": "assets/test.wav"
+			}
+		]
+}
