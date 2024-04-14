@@ -5,6 +5,7 @@ from json import loads, dumps
 from pprint import pprint
 from yuki.video import EP, Scene_Static, Scene_Zoom_In 
 from pathlib import Path
+from os import mkdir
 
 class Renderer:
     name="yuki-video_renderer"
@@ -47,16 +48,12 @@ class Renderer:
     def _render_request(self, channel, method, properties, body):
         data=loads(body.decode('utf8'))
         pprint(data)
-
-        data['episode_meta']['video_file']=self._renders_dir.joinpath(data['episode_meta']['video_file'])
-
-        data['episode_meta']['background_image']=self._media_dir.joinpath(data['episode_meta']['background_image'])
-        data['episode_meta']['background_audio']=self._media_dir.joinpath(data['episode_meta']['background_audio'])
         
         ep=EP(**data['episode_meta'])
         for scene in data['scenes']:
             scene['image']=self._media_dir.joinpath(scene['image'])
             scene['audio']=self._media_dir.joinpath(scene['audio'])
+            scene['audio_volume']=1
             if scene['type']=='static':
                 ep.add_scene(Scene_Static, **scene)
             elif scene['type']=='zoom_in':
