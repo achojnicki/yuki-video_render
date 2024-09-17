@@ -3,7 +3,7 @@ from adistools.log import Log
 from pika import BlockingConnection, PlainCredentials, ConnectionParameters
 from json import loads, dumps
 from pprint import pprint
-from yuki.video import EP, Scene_Static, Scene_Zoom_In 
+from yuki.video import EP, Scene_Static, Scene_Zoom_In, Scene_Wobbling_Grow, Scene_Grow
 from pathlib import Path
 from os import mkdir
 
@@ -54,10 +54,18 @@ class Renderer:
             scene['image']=self._media_dir.joinpath(scene['image'])
             scene['audio']=self._media_dir.joinpath(scene['audio'])
             scene['audio_volume']=1
-            if scene['type']=='static':
+
+            if scene['scene_effect']=='static':
                 ep.add_scene(Scene_Static, **scene)
-            elif scene['type']=='zoom_in':
+
+            elif scene['scene_effect']=='zoom_in':
                 ep.add_scene(Scene_Zoom_In, **scene)
+                
+            elif scene['scene_effect']=='wobbling_grow':
+                ep.add_scene(Scene_Wobbling_Grow, **scene)
+
+            elif scene['scene_effect']=='grow':
+                ep.add_scene(Scene_Grow, **scene)
 
         ep.render()
 
